@@ -69,7 +69,6 @@ export default function CheckoutPage() {
           <Map
             location={order.addressLatLng}
             onChange={latlng => {
-              console.log(latlng);
               setOrder({ ...order, addressLatLng: latlng });
             }}
           />

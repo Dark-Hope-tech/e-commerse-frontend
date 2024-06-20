@@ -51,7 +51,7 @@ export default function FoodsAdminPage() {
           placeholder="Search Foods"
         />
         <Link to="/admin/addFood" className={classes.add_food}>
-          Add Food +
+          Add Item +
         </Link>
         <FoodsNotFound />
         {foods &&

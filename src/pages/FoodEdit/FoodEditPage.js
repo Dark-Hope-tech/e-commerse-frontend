@@ -58,7 +58,7 @@ export default function FoodEditPage() {
   return (
     <div className={classes.container}>
       <div className={classes.content}>
-        <Title title={isEditMode ? 'Edit Food' : 'Add Food'} />
+        <Title title={isEditMode ? 'Edit Item' : 'Add Item'} />
         <form
           className={classes.form}
           onSubmit={handleSubmit(submit)}

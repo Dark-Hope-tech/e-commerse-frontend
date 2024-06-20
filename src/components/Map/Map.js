@@ -57,7 +57,15 @@ function FindButtonAndMarker({ readonly, location, onChange }) {
       map.flyTo(e.latlng, 13);
     },
     locationerror(e) {
-      toast.error(e.message);
+        if (e.code === 1) {
+          toast.error("Location access denied by the user.");
+        } else if (e.code === 2) {
+          toast.error("Position unavailable.");
+        } else if (e.code === 3) {
+          toast.error("Location request timed out. Please try again.");
+        } else {
+          toast.error("An unknown error occurred.");
+        }
     },
   });
 
@@ -74,7 +82,14 @@ function FindButtonAndMarker({ readonly, location, onChange }) {
         <button
           type="button"
           className={classes.find_location}
-          onClick={() => map.locate()}
+          onClick={
+            () => map.locate({
+                setView: true,
+                watch: true,
+                enableHighAccuracy: true,
+                timeout: 30000, // 10 seconds
+            })
+          }
         >
           Find My Location
         </button>
