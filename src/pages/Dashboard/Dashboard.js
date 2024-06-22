@@ -53,8 +53,8 @@ const allItems = [
     color: 'white',
   },
   {
-    title: 'Foods',
-    imageUrl: '/icons/foods.svg',
+    title: 'Items',
+    imageUrl: '/icons/storeicon.svg',
     url: '/admin/foods',
     forAdmin: true,
     bgColor: '#e040fb',

@@ -43,12 +43,12 @@ export default function FoodsAdminPage() {
   return (
     <div className={classes.container}>
       <div className={classes.list}>
-        <Title title="Manage Foods" margin="1rem auto" />
+        <Title title="Manage Items" margin="1rem auto" />
         <Search
           searchRoute="/admin/foods/"
           defaultRoute="/admin/foods"
           margin="1rem 0"
-          placeholder="Search Foods"
+          placeholder="Search Items"
         />
         <Link to="/admin/addFood" className={classes.add_food}>
           Add Item +
