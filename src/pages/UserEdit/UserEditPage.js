@@ -57,6 +57,11 @@ export default function UserEditPage() {
             {...register('address', { required: true, minLength: 5 })}
             error={errors.address}
           />
+          <Input
+            label="Password"
+            {...register('password', { required: true, minLength: 8 })}
+            error={errors.password}
+          />
 
           <Input label="Is Admin" type="checkbox" {...register('isAdmin')} />
           <Button type="submit" />
