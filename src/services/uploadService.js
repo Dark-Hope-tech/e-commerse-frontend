@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import Compressor from 'compressorjs';
 
 export const uploadImage = async event => {
   let toastId = null;
@@ -7,8 +8,10 @@ export const uploadImage = async event => {
   const image = await getImage(event);
   if (!image) return null;
 
+  const compressedImage = await compressImage(image);
+  
   const formData = new FormData();
-  formData.append('image', image, image.name);
+  formData.append('image', compressedImage, compressedImage.name);
   const response = await axios.post('api/upload', formData, {
     onUploadProgress: ({ progress }) => {
       if (toastId) toast.update(toastId, { progress });
@@ -23,7 +26,7 @@ const getImage = async event => {
   const files = event.target.files;
 
   if (!files || files.length <= 0) {
-    toast.warning('Upload file is nott selected!', 'File Upload');
+    toast.warning('Upload file is not selected!', 'File Upload');
     return null;
   }
 
@@ -35,4 +38,24 @@ const getImage = async event => {
   }
 
   return file;
+};
+
+const compressImage = image => {
+  return new Promise((resolve, reject) => {
+    if (image.size <= 750 * 1024) {
+      // If the image size is less than or equal to 750KB, no need to compress
+      resolve(image);
+    } else {
+      new Compressor(image, {
+        quality: 0.6, // Adjust the quality as needed
+        success: compressedImage => {
+          resolve(compressedImage);
+        },
+        error: err => {
+          toast.error('Image compression failed', 'Compression Error');
+          reject(err);
+        },
+      });
+    }
+  });
 };
